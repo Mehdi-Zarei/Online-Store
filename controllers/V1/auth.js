@@ -1,5 +1,6 @@
 const usersModel = require("../../models/user");
 const registerValidator = require("../../validators/register");
+const banUsers = require("../../models/ban-phone");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -9,6 +10,12 @@ exports.register = async (req, res) => {
     return res.status(422).json(validatorResult);
   }
   const { name, userName, email, phone, password } = req.body;
+
+  const isBanPhone = await banUsers.findOne({ phone });
+
+  if (isBanPhone) {
+    return res.status(409).json({ message: "This phone number is ban!!" });
+  }
 
   const isPhoneExist = await usersModel.findOne({ phone });
 
