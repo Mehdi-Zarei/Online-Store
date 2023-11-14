@@ -10,8 +10,16 @@ exports.register = async (req, res) => {
   }
   const { name, userName, email, phone, password } = req.body;
 
+  const isPhoneExist = await usersModel.findOne({ phone });
+
+  if (isPhoneExist) {
+    return res
+      .status(409)
+      .json({ message: "Phone number is already registered" });
+  }
+
   const isUserExists = await usersModel.findOne({
-    $or: [{ userName }, { email }, { phone }],
+    $or: [{ userName }, { email }],
   });
 
   if (isUserExists) {
@@ -19,10 +27,6 @@ exports.register = async (req, res) => {
       return res.status(409).json({ message: "User name is already exist" });
     } else if (isUserExists.email === email) {
       return res.status(409).json({ message: "Email is already in use" });
-    } else if (isUserExists.phone === phone) {
-      return res
-        .status(409)
-        .json({ message: "Phone number is already registered" });
     }
   }
 
