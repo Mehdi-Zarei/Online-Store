@@ -1,6 +1,6 @@
 const usersModel = require("../../models/user");
 const registerValidator = require("../../validators/register");
-const banUsers = require("../../models/ban-phone");
+const banModel = require("../../models/banUsers");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -11,7 +11,7 @@ exports.register = async (req, res) => {
   }
   const { name, userName, email, phone, password } = req.body;
 
-  const isBanPhone = await banUsers.findOne({ phone });
+  const isBanPhone = await banModel.findOne({ phone });
 
   if (isBanPhone) {
     return res.status(409).json({ message: "This phone number is ban!!" });
@@ -60,6 +60,36 @@ exports.register = async (req, res) => {
   return res.status(201).json({ newUser: userObject, accessToken });
 };
 
-exports.login = async (req, res) => {};
+exports.login = async (req, res) => {
+  const { identifier, password } = req.body;
 
-exports.getMe = async (req, res) => {};
+  const user = await usersModel
+    .findOne({
+      $or: [{ email: identifier }, { userName: identifier }],
+    })
+    .lean();
+
+  if (!user) {
+    return res.status(409).json({ message: "Email or user name not valid!!" });
+  }
+  const comparPassword = await bcrypt.compare(password, user.password);
+
+  if (!comparPassword) {
+    return res.status(409).json({ message: "Password not valid!!" });
+  }
+  const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "30 day",
+  });
+  return res.status(200).json({
+    message: "You have successfully logged into your account",
+    accessToken,
+  });
+};
+
+exports.getMe = async (req, res) => {
+  if (user.email !== identifier) {
+    return res.status(401).json({ message: "Email not found !!" });
+  } else if (user.userName !== identifier) {
+    return res.status(401).json({ message: "User name not found !!" });
+  }
+};
