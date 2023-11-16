@@ -60,6 +60,39 @@ exports.register = async (req, res) => {
   return res.status(201).json({ newUser: userObject, accessToken });
 };
 
-exports.login = async (req, res) => {};
+exports.login = async (req, res) => {
+  const { identifier, password } = req.body;
+
+  const user = await usersModel.findOne({
+    $or: [{ email: identifier }, { userName: identifier }],
+  });
+
+  if (!user) {
+    return res.status(409).json({ message: "Email or user name not valid!!" });
+  }
+
+  const isBanUser = await banModel.findOne({
+    $or: [{ email: identifier }, { userName: identifier }],
+  });
+
+  if (isBanUser) {
+    return res.status(409).json({ message: "This user is baned !!" });
+  }
+
+  const comparePassword = await bcrypt.compare(password, user.password);
+
+  if (!comparePassword) {
+    return res.status(409).json({ message: "Password not valid!!" });
+  }
+
+  const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "30 day",
+  });
+
+  return res.status(200).json({
+    message: "You have successfully logged into your account",
+    accessToken,
+  });
+};
 
 exports.getMe = async (req, res) => {};
