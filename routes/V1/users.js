@@ -4,6 +4,8 @@ const controller = require("../../controllers/V1/banUsers");
 const authMiddleware = require("../../middlewares/auth");
 const isAdminMiddleware = require("../../middlewares/isAdmin");
 
+router.route("/").get(controller.getAll);
+
 router
   .route("/:id")
   .post(authMiddleware, isAdminMiddleware, controller.banUsers);
