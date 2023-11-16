@@ -2,12 +2,12 @@ const usersModel = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
-  const authHeader = req.header("Authorization").split(" ");
+  const authHeader = req.header("Authorization")?.split(" ");
 
-  if (authHeader.length !== 2) {
+  if (authHeader?.length !== 2) {
     return res
       .status(403)
-      .json({ message: "You don`t have access to th route !!" });
+      .json({ message: "You don`t have access to this route !!" });
   }
 
   const token = authHeader[1];
