@@ -3,7 +3,7 @@ const app = express();
 const corse = require("cors");
 const path = require("path");
 const authRouter = require("./routes/V1/auth");
-const banRouter = require("./routes/V1/ban-phone");
+const banRouter = require("./routes/V1/banUsers");
 app.use(express.json());
 app.use(corse());
 app.use(
