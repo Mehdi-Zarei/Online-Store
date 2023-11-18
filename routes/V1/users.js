@@ -8,6 +8,7 @@ router.route("/").get(authMiddleware, isAdminMiddleware, controller.getAll);
 
 router
   .route("/:id")
-  .post(authMiddleware, isAdminMiddleware, controller.banUsers);
+  .post(authMiddleware, isAdminMiddleware, controller.banUsers)
+  .delete(controller.removeUser);
 
 module.exports = router;

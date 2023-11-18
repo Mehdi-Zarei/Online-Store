@@ -3,8 +3,8 @@ const Validator = require("fastest-validator");
 const v = new Validator();
 
 const schema = {
-  name: { type: "string", min: 3, max: 15 },
-  userName: { type: "string", min: 5, max: 15 },
+  name: { type: "string", min: 3, max: 50 },
+  userName: { type: "string", min: 5, max: 50 },
   email: { type: "email", max: 100 },
   phone: { type: "string", length: 11 },
   password: { type: "string", min: 8 },

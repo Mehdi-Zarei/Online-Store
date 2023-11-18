@@ -1,5 +1,6 @@
 const usersModel = require("../../models/user");
 const banModel = require("../../models/banUsers");
+const { default: mongoose, isValidObjectId } = require("mongoose");
 
 exports.banUsers = async (req, res) => {
   const mainUser = await usersModel.findOne({ _id: req.params.id });
@@ -26,7 +27,23 @@ exports.banUsers = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
-  const users = await usersModel.find({}, "-password").lean();
+  const users = await usersModel.find({}, "-password -__v").lean();
 
   return res.json(users);
+};
+
+exports.removeUser = async (req, res) => {
+  const isValidUserId = isValidObjectId(req.params.id);
+
+  if (!isValidUserId) {
+    return res.status(409).json({ message: "user ID not valid !!" });
+  }
+
+  const remove = await usersModel.findOneAndDelete({ _id: req.params.id });
+
+  if (!remove) {
+    return res.status(404).json({ message: "User not found whit this ID !!" });
+  }
+
+  return res.status(200).json({ message: "User removed successfully." });
 };
