@@ -11,4 +11,8 @@ router
   .post(authMiddleware, isAdminMiddleware, controller.banUsers)
   .delete(controller.removeUser);
 
+router
+  .route("/role")
+  .put(authMiddleware, isAdminMiddleware, controller.changeUserRole);
+
 module.exports = router;
