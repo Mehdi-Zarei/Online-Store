@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
   {
-    phone: {
+    name: {
       type: String,
       required: true,
     },
@@ -10,11 +10,15 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
     },
+    phone: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
     },
-    id: {
+    userID: {
       type: String,
       required: true,
     },
@@ -22,6 +26,6 @@ const schema = mongoose.Schema(
   { timestamps: true }
 );
 
-const banUsers = mongoose.model("BanUsers", schema);
+const banUsers = mongoose.model("banUsers", schema);
 
 module.exports = banUsers;

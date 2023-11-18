@@ -4,22 +4,29 @@ const banModel = require("../../models/banUsers");
 exports.banUsers = async (req, res) => {
   const mainUser = await usersModel.findOne({ _id: req.params.id });
 
-  const alreadyBaned = await banModel.findOne({ id: req.params.id });
+  const alreadyBaned = await banModel.findOne({ userID: req.params.id });
 
   if (alreadyBaned) {
-    return res.status(403).json({ message: "User already Baned !!" });
+    return res.status(409).json({ message: "User already baned !!" });
   }
 
-  const banUsers = await banModel.create({
-    phone: mainUser.phone,
+  const banUser = await banModel.create({
+    name: mainUser.name,
     userName: mainUser.userName,
     email: mainUser.email,
-    id: mainUser._id,
+    phone: mainUser.phone,
+    userID: mainUser._id,
   });
 
-  if (banUsers) {
-    return res.status(200).json({ message: "User Baned Successfully." });
+  if (banUser) {
+    return res.status(201).json({ message: "User baned successfully." });
   } else {
-    return res.status(500).json({ message: "Server Error!!" });
+    return res.status(500).json({ message: "Server error !!" });
   }
+};
+
+exports.getAll = async (req, res) => {
+  const users = await usersModel.find({}, "-password").lean();
+
+  return res.json(users);
 };

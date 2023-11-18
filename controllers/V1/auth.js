@@ -6,9 +6,11 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   const validatorResult = registerValidator(req.body);
+
   if (validatorResult != true) {
     return res.status(422).json(validatorResult);
   }
+
   const { name, userName, email, phone, password } = req.body;
 
   const isBanPhone = await banModel.findOne({ phone });
@@ -17,7 +19,7 @@ exports.register = async (req, res) => {
     return res.status(409).json({ message: "This phone number is ban!!" });
   }
 
-  const isPhoneExist = await usersModel.findOne({ phone });
+  const isPhoneExist = await usersModel.findOne({ phone }).lean();
 
   if (isPhoneExist) {
     return res
@@ -25,9 +27,11 @@ exports.register = async (req, res) => {
       .json({ message: "Phone number is already registered" });
   }
 
-  const isUserExists = await usersModel.findOne({
-    $or: [{ userName }, { email }],
-  });
+  const isUserExists = await usersModel
+    .findOne({
+      $or: [{ userName }, { email }],
+    })
+    .lean();
 
   if (isUserExists) {
     if (isUserExists.userName === userName) {

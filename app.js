@@ -11,6 +11,7 @@ app.use(
   express.static(path.join(__dirname, "public", "courses", "covers"))
 );
 app.use("/v1/auth", authRouter);
+app.use("/v1/users", usersRouter);
 app.use("/v1/users/ban", usersRouter);
 
 module.exports = app;
