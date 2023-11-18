@@ -4,7 +4,10 @@ const controller = require("../../controllers/V1/users");
 const authMiddleware = require("../../middlewares/auth");
 const isAdminMiddleware = require("../../middlewares/isAdmin");
 
-router.route("/").get(authMiddleware, isAdminMiddleware, controller.getAll);
+router
+  .route("/")
+  .get(authMiddleware, isAdminMiddleware, controller.getAll)
+  .put(authMiddleware, controller.updateUser);
 
 router
   .route("/:id")
