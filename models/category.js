@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
-    title: {
+    href: {
       type: String,
       required: true,
     },
