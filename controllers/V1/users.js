@@ -1,5 +1,6 @@
 const usersModel = require("../../models/user");
 const banModel = require("../../models/banUsers");
+const bcrypt = require("bcrypt");
 const { default: mongoose, isValidObjectId } = require("mongoose");
 
 exports.banUsers = async (req, res) => {
@@ -74,4 +75,28 @@ exports.changeUserRole = async (req, res) => {
   }
 
   return res.status(200).json({ message: "User role changed successfully !!" });
+};
+
+exports.updateUser = async (req, res) => {
+  const { name, userName, phone, email, password } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 12);
+
+  const update = await usersModel
+    .findByIdAndUpdate(
+      { _id: req.user._id },
+      {
+        name,
+        userName,
+        email,
+        phone,
+        password: hashedPassword,
+      }
+    )
+    .select("-password -__v")
+    .lean();
+  return res.status(200).json({
+    message: "Your user information has been successfully updated.",
+    update,
+  });
 };
