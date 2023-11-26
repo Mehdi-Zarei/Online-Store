@@ -10,6 +10,10 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
     },
+    descriptions: {
+      type: String,
+      required: true,
+    },
     cover: {
       type: String,
       required: true,
