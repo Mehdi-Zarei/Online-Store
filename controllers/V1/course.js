@@ -1,4 +1,5 @@
 const courseModel = require("../../models/course");
+const sessionsModel = require("../../models/sessions");
 
 exports.create = async (req, res) => {
   const {
@@ -38,4 +39,32 @@ exports.create = async (req, res) => {
     .populate("creator", "-password -__v");
 
   return res.status(201).json(mainCourse);
+};
+
+exports.addSessions = async (req, res) => {
+  const { title, time, free } = req.body;
+
+  const sessionExist = await sessionsModel.findOne({ title });
+
+  if (sessionExist) {
+    return res.status(409).json({ message: "This session already exists!!" });
+  }
+
+  const session = await sessionsModel.create({
+    title,
+    time,
+    free,
+    video: req.file.filename,
+    course: req.params.id,
+  });
+
+  return res.status(201).json(session);
+};
+
+exports.getAllSessions = async (req, res) => {
+  const sessions = await sessionsModel
+    .find({})
+    .populate("course", "name")
+    .lean();
+  return res.json(sessions);
 };
