@@ -15,4 +15,17 @@ courseRouter
     courseController.create
   );
 
+courseRouter
+  .route("/:id/sessions")
+  .post(
+    multer({ storage: multerStorage }).single("video"),
+    authMiddleware,
+    isAdminMiddleware,
+    courseController.addSessions
+  );
+
+courseRouter
+  .route("/sessions")
+  .get(authMiddleware, isAdminMiddleware, courseController.getAllSessions);
+
 module.exports = courseRouter;
