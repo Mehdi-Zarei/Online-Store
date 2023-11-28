@@ -18,9 +18,9 @@ courseRouter
 courseRouter
   .route("/:id/sessions")
   .post(
-    multer({ storage: multerStorage }).single("video"),
     authMiddleware,
     isAdminMiddleware,
+    multer({ storage: multerStorage }).single("video"),
     courseController.addSessions
   );
 
