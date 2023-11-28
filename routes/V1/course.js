@@ -28,4 +28,6 @@ courseRouter
   .route("/sessions")
   .get(authMiddleware, isAdminMiddleware, courseController.getAllSessions);
 
+courseRouter.route("/:href/:sessionID").get(courseController.getSessionInfo);
+
 module.exports = courseRouter;
