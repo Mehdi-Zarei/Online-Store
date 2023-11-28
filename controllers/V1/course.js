@@ -68,3 +68,13 @@ exports.getAllSessions = async (req, res) => {
     .lean();
   return res.json(sessions);
 };
+
+exports.getSessionInfo = async (req, res) => {
+  const course = await courseModel.findOne({ href: req.params.href }).lean();
+
+  const session = await sessionsModel.findOne({ _id: req.params.sessionID });
+
+  const sessions = await sessionsModel.find({ course: course._id }).lean();
+
+  return res.status(200).json({ session, sessions });
+};
