@@ -61,7 +61,7 @@ exports.addSessions = async (req, res) => {
   return res.status(201).json(session);
 };
 
-exports.getAllSessions = async (req, res) => {
+exports.adminGetRecentSessions = async (req, res) => {
   const sessions = await sessionsModel
     .find({})
     .populate("course", "name")

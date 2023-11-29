@@ -26,7 +26,11 @@ courseRouter
 
 courseRouter
   .route("/sessions")
-  .get(authMiddleware, isAdminMiddleware, courseController.getAllSessions);
+  .get(
+    authMiddleware,
+    isAdminMiddleware,
+    courseController.adminGetRecentSessions
+  );
 
 courseRouter.route("/:href/:sessionID").get(courseController.getSessionInfo);
 
