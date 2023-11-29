@@ -1,5 +1,6 @@
 const courseModel = require("../../models/course");
 const sessionsModel = require("../../models/sessions");
+const { isValidObjectId } = require("mongoose");
 
 exports.create = async (req, res) => {
   const {
@@ -77,4 +78,20 @@ exports.getSessionInfo = async (req, res) => {
   const sessions = await sessionsModel.find({ course: course._id }).lean();
 
   return res.status(200).json({ session, sessions });
+};
+
+exports.removeSession = async (req, res) => {
+  const validObjectIdResult = isValidObjectId(req.params.id);
+
+  if (validObjectIdResult != true) {
+    return res.status(409).json({ message: "Session ID not valid !!" });
+  }
+
+  const remove = await sessionsModel.findOneAndDelete({ _id: req.params.id });
+
+  if (!remove) {
+    return res.status(404).json({ message: "Session not found !!" });
+  }
+
+  return res.json({ message: "Session deleted successfully !!", remove });
 };
