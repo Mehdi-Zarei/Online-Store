@@ -6,6 +6,7 @@ const authRouter = require("./routes/V1/auth");
 const usersRouter = require("./routes/V1/users");
 const categoryRouter = require("./routes/V1/category");
 const courseRouter = require("./routes/V1/course");
+const commentsRouter = require("./routes/V1/comment");
 app.use(express.json());
 app.use(corse());
 app.use(
@@ -17,5 +18,6 @@ app.use("/v1/users", usersRouter);
 app.use("/v1/users/ban", usersRouter);
 app.use("/v1/category", categoryRouter);
 app.use("/v1/course", courseRouter);
+app.use("/v1/comments", commentsRouter);
 
 module.exports = app;
