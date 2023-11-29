@@ -38,4 +38,8 @@ courseRouter
   .route("/sessions/:id")
   .delete(authMiddleware, isAdminMiddleware, courseController.removeSession);
 
+courseRouter
+  .route("/:id/register")
+  .post(authMiddleware, courseController.register);
+
 module.exports = courseRouter;
