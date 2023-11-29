@@ -34,4 +34,8 @@ courseRouter
 
 courseRouter.route("/:href/:sessionID").get(courseController.getSessionInfo);
 
+courseRouter
+  .route("/sessions/:id")
+  .delete(authMiddleware, isAdminMiddleware, courseController.removeSession);
+
 module.exports = courseRouter;
