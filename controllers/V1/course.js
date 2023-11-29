@@ -1,4 +1,5 @@
 const courseModel = require("../../models/course");
+const userCourseModel = require("../../models/userCourse");
 const sessionsModel = require("../../models/sessions");
 const { isValidObjectId } = require("mongoose");
 
@@ -94,4 +95,28 @@ exports.removeSession = async (req, res) => {
   }
 
   return res.json({ message: "Session deleted successfully !!", remove });
+};
+
+exports.register = async (req, res) => {
+  const isUserAlreadyRegisteredInCourse = await userCourseModel.findOne({
+    course: req.params.id,
+    user: req.user._id,
+  });
+
+  if (isUserAlreadyRegisteredInCourse) {
+    return res
+      .status(409)
+      .json({ message: "You have already registered for this course !!" });
+  }
+
+  const register = await userCourseModel.create({
+    course: req.params.id,
+    user: req.user._id,
+    price: req.body.price,
+  });
+
+  return res.status(201).json({
+    message:
+      "Your registration for this course has been successfully completed.",
+  });
 };
