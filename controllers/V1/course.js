@@ -1,4 +1,5 @@
 const courseModel = require("../../models/course");
+const commentsModel = require("../../models/comments");
 const userCourseModel = require("../../models/userCourse");
 const sessionsModel = require("../../models/sessions");
 const { isValidObjectId } = require("mongoose");
@@ -119,4 +120,24 @@ exports.register = async (req, res) => {
     message:
       "Your registration for this course has been successfully completed.",
   });
+};
+
+exports.getOne = async (req, res) => {
+  const { href } = req.params;
+
+  const course = await courseModel
+    .findOne({ href }, "-__v")
+    .populate("creator");
+
+  const session = await sessionsModel.find({ course: course._id }, "-__v");
+
+  const comment = await commentsModel
+    .find({ course: course._id, isAnswer: 1 })
+    .populate("creator", "-password -__v");
+
+  const userCourseCount = await userCourseModel
+    .find({ course: course._id })
+    .count();
+
+  return res.json({ course, session, comment, userCourseCount });
 };
