@@ -14,4 +14,6 @@ router
   .delete(authMiddleware, isAdminMiddleware, categoryController.remove)
   .put(authMiddleware, isAdminMiddleware, categoryController.update);
 
+router.route("/:href").get(categoryController.getCourseByCategory);
+
 module.exports = router;
