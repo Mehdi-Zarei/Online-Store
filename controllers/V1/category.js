@@ -1,5 +1,6 @@
 const { isValidObjectId } = require("mongoose");
 const categoryModel = require("../../models/category");
+const courseModel = require("../../models/course");
 const validator = require("../../validators/category");
 
 exports.create = async (req, res) => {
@@ -76,4 +77,16 @@ exports.update = async (req, res) => {
     }
   );
   return res.status(200).json({ message: "Category info updated.", update });
+};
+
+exports.getCourseByCategory = async (req, res) => {
+  const { href } = req.params;
+  const category = await categoryModel.findOne({ href });
+
+  if (category) {
+    const course = await courseModel.find({ categoryID: category._id }, "-__v");
+    res.json(course);
+  } else {
+    res.json([]);
+  }
 };
