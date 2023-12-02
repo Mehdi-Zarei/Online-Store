@@ -15,6 +15,10 @@ courseRouter
     courseController.create
   );
 
+courseRouter
+  .route("/:id")
+  .delete(authMiddleware, isAdminMiddleware, courseController.removeCourse);
+
 courseRouter.route("/:href").get(authMiddleware, courseController.getOne);
 
 courseRouter
