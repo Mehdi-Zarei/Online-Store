@@ -123,6 +123,8 @@ exports.register = async (req, res) => {
 };
 
 exports.getOne = async (req, res) => {
+  //TODO If the user does not have a token, it will not show any details, but the code should be such that if the user does not have a token, it will only show free sessions.
+
   const { href } = req.params;
 
   const course = await courseModel
@@ -136,13 +138,13 @@ exports.getOne = async (req, res) => {
 
   let sessions;
 
-  if (!didUserRegisterToThisCourse) {
+  if (didUserRegisterToThisCourse) {
+    sessions = await sessionsModel.find({ course: course._id }, "-__v");
+  } else {
     sessions = await sessionsModel.find(
       { course: course._id, free: 1 },
       "-__v"
     );
-  } else {
-    sessions = await sessionsModel.find({ course: course._id }, "-__v");
   }
 
   const comment = await commentsModel
