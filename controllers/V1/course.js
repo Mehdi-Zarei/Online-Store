@@ -129,7 +129,21 @@ exports.getOne = async (req, res) => {
     .findOne({ href }, "-__v")
     .populate("creator");
 
-  const session = await sessionsModel.find({ course: course._id }, "-__v");
+  const didUserRegisterToThisCourse = !!(await userCourseModel.findOne({
+    course: course._id,
+    user: req.user._id,
+  }));
+
+  let sessions;
+
+  if (!didUserRegisterToThisCourse) {
+    sessions = await sessionsModel.find(
+      { course: course._id, free: 1 },
+      "-__v"
+    );
+  } else {
+    sessions = await sessionsModel.find({ course: course._id }, "-__v");
+  }
 
   const comment = await commentsModel
     .find({ course: course._id, isAnswer: 1 })
@@ -139,5 +153,11 @@ exports.getOne = async (req, res) => {
     .find({ course: course._id })
     .count();
 
-  return res.json({ course, session, comment, userCourseCount });
+  return res.json({
+    course,
+    sessions,
+    comment,
+    userCourseCount,
+    didUserRegisterToThisCourse,
+  });
 };
