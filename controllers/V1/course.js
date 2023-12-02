@@ -163,3 +163,21 @@ exports.getOne = async (req, res) => {
     didUserRegisterToThisCourse,
   });
 };
+
+exports.removeCourse = async (req, res) => {
+  const isValidIDResult = isValidObjectId(req.params);
+
+  if (!isValidIDResult) {
+    return res.status(409).json({ message: "Course ID not valid !!" });
+  }
+
+  const remove = await courseModel.findOneAndDelete({ _id: req.params.id });
+
+  if (!remove) {
+    return res
+      .status(404)
+      .json({ message: "Course not found with this ID !!" });
+  }
+
+  return res.status(200).json(remove);
+};
