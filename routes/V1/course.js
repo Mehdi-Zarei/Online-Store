@@ -15,7 +15,7 @@ courseRouter
     courseController.create
   );
 
-courseRouter.route("/:href").get(courseController.getOne);
+courseRouter.route("/:href").get(authMiddleware, courseController.getOne);
 
 courseRouter
   .route("/:id/sessions")
