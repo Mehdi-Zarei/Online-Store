@@ -75,3 +75,33 @@ exports.reject = async (req, res) => {
 
   return res.status(200).json({ message: "Comment rejected successfully!!" });
 };
+
+exports.answer = async (req, res) => {
+  const isValidObjectIDResult = mongoose.Types.ObjectId.isValid(req.params.id);
+
+  if (!isValidObjectIDResult) {
+    return res.status(422).json({ message: "Comment ID not valid !!" });
+  }
+
+  const { body } = req.body;
+
+  const acceptedComment = await commentsModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { isAccept: 1 }
+  );
+
+  if (!acceptedComment) {
+    return res.status(404).json({ message: "Comment not found!!" });
+  }
+
+  const answerComment = await commentsModel.create({
+    body,
+    course: acceptedComment.course,
+    creator: req.user._id,
+    isAnswer: 1,
+    isAccept: 1,
+    mainCommentID: req.params.id,
+  });
+
+  return res.status(201).json(answerComment);
+};
