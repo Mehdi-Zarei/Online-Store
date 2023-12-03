@@ -123,7 +123,7 @@ exports.register = async (req, res) => {
 };
 
 exports.getOne = async (req, res) => {
-  //   //TODO If the user does not have a token, it will not show any details, but the code should be such that if the user does not have a token, it will only show free sessions.
+  //TODO If the user does not have a token, it will not show any details, but the code should be such that if the user does not have a token, it will only show free sessions.
 
   const { href } = req.params;
 
@@ -131,21 +131,7 @@ exports.getOne = async (req, res) => {
     .findOne({ href }, "-__v")
     .populate("creator");
 
-  const didUserRegisterToThisCourse = !!(await userCourseModel.findOne({
-    course: course._id,
-    user: req.user._id,
-  }));
-
-  let sessions;
-
-  if (didUserRegisterToThisCourse) {
-    sessions = await sessionsModel.find({ course: course._id }, "-__v");
-  } else {
-    sessions = await sessionsModel.find(
-      { course: course._id, free: 1 },
-      "-__v"
-    );
-  }
+  const sessions = await sessionsModel.find({ course: course._id }, "-__v");
 
   const comment = await commentsModel
     .find({ course: course._id, isAccept: 1 })
@@ -154,6 +140,11 @@ exports.getOne = async (req, res) => {
   const userCourseCount = await userCourseModel
     .find({ course: course._id })
     .count();
+
+  const didUserRegisterToThisCourse = !!(await userCourseModel.findOne({
+    course: course._id,
+    user: req.user._id,
+  }));
 
   return res.json({
     course,
