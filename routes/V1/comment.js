@@ -18,4 +18,8 @@ commentsRouter
   .route("/:id/reject")
   .put(authMiddleware, isAdminMiddleware, commentsController.reject);
 
+commentsRouter
+  .route("/:id/answer")
+  .post(authMiddleware, isAdminMiddleware, commentsController.answer);
+
 module.exports = commentsRouter;
