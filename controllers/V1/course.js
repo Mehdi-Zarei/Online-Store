@@ -148,7 +148,7 @@ exports.getOne = async (req, res) => {
   }
 
   const comment = await commentsModel
-    .find({ course: course._id, isAnswer: 1 })
+    .find({ course: course._id, isAccept: 1 })
     .populate("creator", "-password -__v");
 
   const userCourseCount = await userCourseModel
