@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const commentsModel = require("../../models/comments");
 const courseModel = require("../../models/course");
 const usersModel = require("../../models/user");
@@ -17,4 +18,20 @@ exports.create = async (req, res) => {
   });
 
   return res.status(201).json(comment);
+};
+
+exports.remove = async (req, res) => {
+  const isValidObjectIDResult = mongoose.Types.ObjectId.isValid(req.params.id);
+
+  if (!isValidObjectIDResult) {
+    return res.status(409).json({ message: "Comment ID not valid !!" });
+  }
+
+  const remove = await commentsModel.findOneAndDelete({ _id: req.params.id });
+
+  if (!remove) {
+    return res.status(404).json({ message: "Comment found !!" });
+  }
+
+  return res.status(200).json(remove);
 };
