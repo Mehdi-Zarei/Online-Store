@@ -38,6 +38,8 @@ courseRouter
     courseController.adminGetRecentSessions
   );
 
+courseRouter.route("/related/:href").get(courseController.getRelatedCourse);
+
 courseRouter.route("/:href/:sessionID").get(courseController.getSessionInfo);
 
 courseRouter
