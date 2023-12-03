@@ -123,7 +123,7 @@ exports.register = async (req, res) => {
 };
 
 exports.getOne = async (req, res) => {
-  //TODO If the user does not have a token, it will not show any details, but the code should be such that if the user does not have a token, it will only show free sessions.
+  //   //TODO If the user does not have a token, it will not show any details, but the code should be such that if the user does not have a token, it will only show free sessions.
 
   const { href } = req.params;
 
@@ -180,4 +180,22 @@ exports.removeCourse = async (req, res) => {
   }
 
   return res.status(200).json(remove);
+};
+
+exports.getRelatedCourse = async (req, res) => {
+  const { href } = req.params;
+
+  const course = await courseModel.findOne({ href });
+
+  if (!course) {
+    return res.status(404).json({ message: "Course not found !!" });
+  }
+
+  let relatedCourses = await courseModel
+    .find({ categoryID: course.categoryID })
+    .lean();
+
+  relatedCourses = relatedCourses.filter((course) => course.href !== href);
+
+  res.status(200).json(relatedCourses);
 };
