@@ -190,3 +190,31 @@ exports.getRelatedCourse = async (req, res) => {
 
   res.status(200).json(relatedCourses);
 };
+
+exports.getPopular = async (req, res) => {
+  const popularComments = await commentsModel
+    .find({
+      score: { $gte: 4 },
+    })
+    .lean();
+
+  const courseIds = popularComments.map((comment) => comment.course);
+
+  const popularCourses = await courseModel
+    .find({
+      _id: { $in: courseIds },
+    })
+    .lean();
+
+  return res.json(popularCourses);
+};
+
+exports.presell = async (req, res) => {
+  const presell = await courseModel.find({ status: "پیش فروش" }).lean();
+
+  if (presell.length === 0) {
+    return res.status(404).json({ message: "No pre-sale course found !!" });
+  }
+
+  return res.json(presell);
+};
