@@ -4,7 +4,10 @@ const authMiddleware = require("../../middlewares/auth");
 const commentsController = require("../../controllers/V1/comment");
 const isAdminMiddleware = require("../../middlewares/isAdmin");
 
-commentsRouter.route("/").post(authMiddleware, commentsController.create);
+commentsRouter
+  .route("/")
+  .post(authMiddleware, commentsController.create)
+  .get(authMiddleware, isAdminMiddleware, commentsController.getAll);
 
 commentsRouter
   .route("/:id")
