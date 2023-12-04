@@ -15,6 +15,9 @@ courseRouter
     courseController.create
   );
 
+courseRouter.route("/popular").get(courseController.getPopular);
+courseRouter.route("/presell").get(courseController.presell);
+
 courseRouter
   .route("/:id")
   .delete(authMiddleware, isAdminMiddleware, courseController.removeCourse);
