@@ -109,8 +109,24 @@ exports.answer = async (req, res) => {
 exports.getAll = async (req, res) => {
   const comments = await commentsModel
     .find({})
+    .populate("creator", "-password")
     .populate("course")
-    .populate("creator")
     .lean();
-  return res.json(comments);
+
+  let allComments = [];
+
+  comments.forEach((comment) => {
+    comments.forEach((answerComment) => {
+      if (String(answerComment.mainCommentID) == String(comment._id)) {
+        allComments.push({
+          ...comment,
+          course: comment.course.name,
+          creator: comment.creator.name,
+          answerComment,
+        });
+      }
+    });
+  });
+
+  return res.json({ comments: allComments });
 };
