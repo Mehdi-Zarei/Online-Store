@@ -133,9 +133,10 @@ exports.getOne = async (req, res) => {
 
   const sessions = await sessionsModel.find({ course: course._id }, "-__v");
 
-  const comment = await commentsModel
+  const comments = await commentsModel
     .find({ course: course._id, isAccept: 1 })
-    .populate("creator", "-password -__v");
+    .populate("creator", "-password -__v")
+    .lean();
 
   const userCourseCount = await userCourseModel
     .find({ course: course._id })
@@ -146,10 +147,25 @@ exports.getOne = async (req, res) => {
     user: req.user._id,
   }));
 
+  let allComments = [];
+
+  comments.forEach((comment) => {
+    comments.forEach((answerComment) => {
+      if (String(comment._id) == String(answerComment.mainCommentID)) {
+        allComments.push({
+          ...comment,
+          course: comment.course.name,
+          creator: comment.creator.name,
+          answerComment,
+        });
+      }
+    });
+  });
+
   return res.json({
     course,
     sessions,
-    comment,
+    comments: allComments,
     userCourseCount,
     didUserRegisterToThisCourse,
   });
