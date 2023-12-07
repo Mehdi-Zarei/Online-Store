@@ -29,12 +29,12 @@ exports.remove = async (req, res) => {
 
   if (!remove) {
     return res
-      .status(422)
+      .status(404)
       .json({ message: "The contact message not found !!" });
   }
 
   return res
-    .status(422)
+    .status(200)
     .json({ message: "Contact message removed successfully." });
 };
 
