@@ -18,7 +18,7 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
     },
-    isAnswer: {
+    answer: {
       type: Number, // 0 - 1
       required: true,
     },
