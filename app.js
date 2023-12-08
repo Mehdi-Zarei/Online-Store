@@ -9,6 +9,7 @@ const courseRouter = require("./routes/V1/course");
 const commentsRouter = require("./routes/V1/comment");
 const contactRouter = require("./routes/V1/contact");
 const newsLettersRouter = require("./routes/V1/newsLetters");
+const searchRouter = require("./routes/V1/search");
 app.use(express.json());
 app.use(corse());
 app.use(
@@ -23,5 +24,6 @@ app.use("/v1/course", courseRouter);
 app.use("/v1/comments", commentsRouter);
 app.use("/v1/contact", contactRouter);
 app.use("/v1/newsletters", newsLettersRouter);
+app.use("/v1/search", searchRouter);
 
 module.exports = app;
