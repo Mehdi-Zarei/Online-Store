@@ -8,6 +8,7 @@ const categoryRouter = require("./routes/V1/category");
 const courseRouter = require("./routes/V1/course");
 const commentsRouter = require("./routes/V1/comment");
 const contactRouter = require("./routes/V1/contact");
+const newsLettersRouter = require("./routes/V1/newsLetters");
 app.use(express.json());
 app.use(corse());
 app.use(
@@ -21,5 +22,6 @@ app.use("/v1/category", categoryRouter);
 app.use("/v1/course", courseRouter);
 app.use("/v1/comments", commentsRouter);
 app.use("/v1/contact", contactRouter);
+app.use("/v1/newsletters", newsLettersRouter);
 
 module.exports = app;
