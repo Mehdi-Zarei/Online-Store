@@ -11,6 +11,7 @@ const contactRouter = require("./routes/V1/contact");
 const newsLettersRouter = require("./routes/V1/newsLetters");
 const searchRouter = require("./routes/V1/search");
 const notificationsRouter = require("./routes/V1/notifications");
+const offRouter = require("./routes/V1/off");
 app.use(express.json());
 app.use(corse());
 app.use(
@@ -27,5 +28,6 @@ app.use("/v1/contact", contactRouter);
 app.use("/v1/newsletters", newsLettersRouter);
 app.use("/v1/search", searchRouter);
 app.use("/v1/notifications", notificationsRouter);
+app.use("/v1/off", offRouter);
 
 module.exports = app;
