@@ -10,13 +10,13 @@ notificationsRouter
   .get(authMiddleware, isAdminMiddleware, notificationsController.getAll);
 
 notificationsRouter
-  .route("/adminsID")
+  .route("/admins")
   .get(authMiddleware, isAdminMiddleware, notificationsController.get);
 
 notificationsRouter
   .route("/:id/seen")
   .put(authMiddleware, isAdminMiddleware, notificationsController.seen);
 
-notificationsRouter.route("/:id").delete(notificationsController.remove);
+notificationsRouter.route("/:id/remove").delete(notificationsController.remove);
 
 module.exports = notificationsRouter;
