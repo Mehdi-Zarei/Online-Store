@@ -16,7 +16,13 @@ exports.create = async (req, res) => {
   return res.status(201).json({ message: "Notification send successfully." });
 };
 
-exports.get = async (req, res) => {};
+exports.get = async (req, res) => {
+  const { _id } = req.user;
+  const adminNotification = await notificationsModel
+    .find({ admin: _id })
+    .lean();
+  return res.status(200).json(adminNotification);
+};
 
 exports.getAll = async (req, res) => {
   const allNotifications = await notificationsModel.find({}).lean();
