@@ -29,7 +29,24 @@ exports.getAll = async (req, res) => {
   return res.json(allNotifications);
 };
 
-exports.seen = async (req, res) => {};
+exports.seen = async (req, res) => {
+  const checkObjectIdResult = mongoose.Types.ObjectId.isValid(req.params);
+
+  if (checkObjectIdResult != true) {
+    return res.status(409).json({ message: "ObjectId not valid !" });
+  }
+
+  const messageSeen = await notificationsModel
+    .findOneAndUpdate({ _id: req.params.id }, { seen: 1 })
+    .select("-__v");
+
+  if (!messageSeen) {
+    return res
+      .status(404)
+      .json({ message: "Notification message not found !" });
+  }
+  return res.json(messageSeen);
+};
 
 exports.remove = async (req, res) => {
   const checkObjectIdResult = mongoose.Types.ObjectId.isValid(req.params);
