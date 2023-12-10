@@ -15,7 +15,7 @@ offRouter
 
 offRouter
   .route("/:code")
-  .post(authMiddleware, isAdminMiddleware, offController.getOn)
+  .get(authMiddleware, isAdminMiddleware, offController.getOn)
   .delete(authMiddleware, isAdminMiddleware, offController.remove);
 
 module.exports = offRouter;
