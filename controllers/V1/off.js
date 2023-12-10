@@ -47,7 +47,7 @@ exports.create = async (req, res) => {
 exports.getOn = async (req, res) => {
   const { code } = req.params;
   const discountCode = await offModel
-    .findOne({ code })
+    .findOne({ code }, "-__v")
     .populate("creator", "name")
     .populate("course", "name");
   if (!discountCode) {
@@ -58,7 +58,10 @@ exports.getOn = async (req, res) => {
 
 exports.remove = async (req, res) => {
   const { code } = req.params;
-  const remove = await offModel.findOneAndDelete({ code });
+  const remove = await offModel
+    .findOneAndDelete({ code })
+    .populate("creator", "name")
+    .populate("course", "name");
   if (!remove) {
     return res.status(404).json({ message: "Discount code not found !" });
   }
