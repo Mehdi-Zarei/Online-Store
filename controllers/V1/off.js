@@ -11,7 +11,11 @@ exports.setOnAll = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
-  const allDiscountCodes = await offModel.find({}).lean();
+  const allDiscountCodes = await offModel
+    .find({}, "-__v")
+    .populate("creator", "name")
+    .populate("course", "name")
+    .lean();
   return res.json(allDiscountCodes);
 };
 
