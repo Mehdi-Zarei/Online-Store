@@ -46,7 +46,10 @@ exports.create = async (req, res) => {
 
 exports.getOn = async (req, res) => {
   const { code } = req.params;
-  const discountCode = await offModel.findOne({ code });
+  const discountCode = await offModel
+    .findOne({ code })
+    .populate("creator", "name")
+    .populate("course", "name");
   if (!discountCode) {
     return res.status(404).json({ message: "Discount code not found!" });
   }
