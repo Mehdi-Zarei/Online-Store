@@ -1,6 +1,7 @@
 const { json } = require("express");
 const courseModel = require("../../models/course");
 const offModel = require("../../models/off");
+const { default: mongoose } = require("mongoose");
 
 exports.setOnAll = async (req, res) => {
   const { discount } = req.body;
@@ -44,16 +45,29 @@ exports.create = async (req, res) => {
     .json({ message: "New discount code created successfully." });
 };
 
-exports.getOn = async (req, res) => {
+exports.useCode = async (req, res) => {
   const { code } = req.params;
-  const discountCode = await offModel
-    .findOne({ code }, "-__v")
-    .populate("creator", "name")
-    .populate("course", "name");
-  if (!discountCode) {
-    return res.status(404).json({ message: "Discount code not found!" });
+  const { course } = req.body;
+
+  if (mongoose.Types.ObjectId.isValid(course) != true) {
+    return res.status(422).json({ message: "Invalid course ID !" });
   }
-  return res.json(discountCode);
+
+  const offCode = await offModel.findOne({ code, course });
+
+  if (!offCode) {
+    return res.status(404).json({ message: "Discount code not found !" });
+  } else if (offCode.uses === offCode.max) {
+    return res
+      .status(409)
+      .json({ message: "This discount code has already been used !" });
+  } else {
+    await offModel.findOneAndUpdate(
+      { code, course },
+      { uses: offCode.uses + 1 }
+    );
+    return res.json(offCode);
+  }
 };
 
 exports.remove = async (req, res) => {
