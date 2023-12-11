@@ -1,7 +1,14 @@
 const { default: mongoose } = require("mongoose");
 const articlesModel = require("../../models/article");
 
-exports.getAll = async (req, res) => {};
+exports.getAll = async (req, res) => {
+  const articles = await articlesModel
+    .find({ publish: 1 }, "-__v -publish")
+    .populate("creator", "name")
+    .populate("categoryID", "title");
+
+  return res.json(articles);
+};
 
 exports.create = async (req, res) => {
   const { body, description, title, href, categoryID } = req.body;
