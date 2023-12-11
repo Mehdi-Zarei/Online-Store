@@ -4,7 +4,7 @@ const articlesController = require("../../controllers/V1/article");
 const authMiddleware = require("../../middlewares/auth");
 const isAdminMiddleware = require("../../middlewares/isAdmin");
 const multer = require("multer");
-const multerStorage = require("../../utils/uploader");
+const multerStorage = require("../../utils/articlesUploader");
 
 articlesRouter
   .route("/")
@@ -27,7 +27,7 @@ articlesRouter
   .post(
     authMiddleware,
     isAdminMiddleware,
-    multer({ storage: multerStorage }).single("ArticlesCovers"),
+    multer({ storage: multerStorage }).single("cover"),
     articlesController.saveDraft
   );
 
