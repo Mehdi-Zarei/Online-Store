@@ -33,7 +33,19 @@ exports.create = async (req, res) => {
   return res.status(201).json(mainArticle);
 };
 
-exports.getOne = async (req, res) => {};
+exports.getOne = async (req, res) => {
+  const { href } = req.params;
+
+  const article = await articlesModel
+    .findOne({ href, publish: 1 }, "-__v -publish")
+    .populate("creator", "name")
+    .populate("categoryID", "title");
+
+  if (!article) {
+    return res.status(404).json({ message: "Article not found !" });
+  }
+  return res.json(article);
+};
 
 exports.remove = async (req, res) => {
   const { id } = req.params;
