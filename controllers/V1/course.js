@@ -129,7 +129,7 @@ exports.getOne = async (req, res) => {
 
   const course = await courseModel
     .findOne({ href }, "-__v")
-    .populate("creator");
+    .populate("creator", "name");
 
   const sessions = await sessionsModel.find({ course: course._id }, "-__v");
 
