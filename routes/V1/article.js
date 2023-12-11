@@ -12,7 +12,7 @@ articlesRouter
   .post(
     authMiddleware,
     isAdminMiddleware,
-    multer({ storage: multerStorage }),
+    multer({ storage: multerStorage }).single("cover"),
     articlesController.create
   );
 
@@ -27,7 +27,7 @@ articlesRouter
   .post(
     authMiddleware,
     isAdminMiddleware,
-    multer({ storage: multerStorage }),
+    multer({ storage: multerStorage }).single("ArticlesCovers"),
     articlesController.saveDraft
   );
 
