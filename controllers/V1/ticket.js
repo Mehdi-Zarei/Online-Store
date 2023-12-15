@@ -40,7 +40,17 @@ exports.create = async (req, res) => {
   return res.status(201).json(mainTicket);
 };
 
-exports.userTickets = async (req, res) => {};
+exports.userTickets = async (req, res) => {
+  const ticket = await ticketsModel
+    .find({ user: req.user._id })
+    .sort({ _id: -1 })
+    .populate("departmentID", "title")
+    .populate("departmentSubID", "title")
+    .populate("user", "name")
+    .lean();
+
+  return res.json(ticket);
+};
 
 exports.departments = async (req, res) => {
   const department = await departmentsModel.find({}, "title").lean();
