@@ -26,7 +26,7 @@ const schema = mongoose.Schema(
     },
     course: {
       type: mongoose.Types.ObjectId,
-      ref: "course",
+      ref: "Course",
       required: false,
     },
     user: {
@@ -38,10 +38,19 @@ const schema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    mainTicketID: {
+      type: mongoose.Types.ObjectId,
+      ref: "Tickets",
+      required: false,
+    },
+    isAnswer: {
+      type: Number, // 0 - 1
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-const model = mongoose.model("tickets", schema);
+const model = mongoose.model("Tickets", schema);
 
 module.exports = model;
