@@ -3,7 +3,16 @@ const departmentsModel = require("../../models/department");
 const departmentsSubModel = require("../../models/departmentSub");
 const { default: mongoose } = require("mongoose");
 
-exports.getAll = async (req, res) => {};
+exports.getAll = async (req, res) => {
+  const tickets = await ticketsModel
+    .find({})
+    .populate("user", "name")
+    .populate("course", "name")
+    .populate("departmentID", "title")
+    .populate("departmentSubID", "title");
+
+  return res.json(tickets);
+};
 
 exports.create = async (req, res) => {
   const { departmentID, departmentSubID, priority, title, body, course } =
