@@ -1,6 +1,7 @@
 const ticketsModel = require("../../models/ticket");
 const departmentsModel = require("../../models/department");
 const departmentsSubModel = require("../../models/departmentSub");
+const { default: mongoose } = require("mongoose");
 
 exports.getAll = async (req, res) => {};
 
@@ -14,7 +15,20 @@ exports.departments = async (req, res) => {
   return res.json(department);
 };
 
-exports.departmentsSub = async (req, res) => {};
+exports.departmentsSub = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(422).json({ message: "Department sub ID not valid !" });
+  }
+  const departmentSub = await departmentsSubModel
+    .find({ parent: id }, "title")
+    .lean();
+
+  if (departmentSub != true) {
+    return res.status(404).json({ message: "Department sub not found ! " });
+  }
+  return res.json(departmentSub);
+};
 
 exports.setAnswer = async (req, res) => {};
 
