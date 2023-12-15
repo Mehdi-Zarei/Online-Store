@@ -77,6 +77,7 @@ exports.setAnswer = async (req, res) => {
     priority: ticket.priority,
     course: ticket.course,
     user: req.user._id,
+    mainTicketID: ticketID,
     answer: 0,
     isAnswer: 1,
   });
@@ -86,7 +87,15 @@ exports.setAnswer = async (req, res) => {
   return res.status(201).json(answer);
 };
 
-exports.getAnswer = async (req, res) => {};
+exports.getAnswer = async (req, res) => {
+  const { id } = req.params;
+
+  const ticket = await ticketsModel.findOne({ _id: id });
+
+  const ticketAnswer = await ticketsModel.findOne({ mainTicketID: id });
+
+  return res.json({ ticket, ticketAnswer });
+};
 
 exports.remove = async (req, res) => {};
 
