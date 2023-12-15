@@ -5,7 +5,31 @@ const { default: mongoose } = require("mongoose");
 
 exports.getAll = async (req, res) => {};
 
-exports.create = async (req, res) => {};
+exports.create = async (req, res) => {
+  const { departmentID, departmentSubID, priority, title, body, course } =
+    req.body;
+
+  const newTicket = await ticketsModel.create({
+    departmentID,
+    departmentSubID,
+    priority,
+    title,
+    body,
+    course,
+    user: req.user._id,
+    answer: 0,
+    isAnswer: 0,
+  });
+
+  const mainTicket = await ticketsModel
+    .findOne({ _id: newTicket._id })
+    .populate("user", "name")
+    .populate("course", "name")
+    .populate("departmentID", "title")
+    .populate("departmentSubID", "title");
+
+  return res.status(201).json(mainTicket);
+};
 
 exports.userTickets = async (req, res) => {};
 
