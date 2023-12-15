@@ -107,7 +107,21 @@ exports.getAnswer = async (req, res) => {
   return res.json({ ticket, ticketAnswer });
 };
 
-exports.remove = async (req, res) => {};
+exports.remove = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(409).json({ message: "Ticket ID not valid !" });
+  }
+
+  const remove = await ticketsModel.findOneAndDelete({ _id: id });
+
+  if (!remove) {
+    return res.status(404).json({ message: "Ticket not found !" });
+  }
+
+  return res.status(200).json({ message: "Ticket removed successfully." });
+};
 
 exports.createDepartments = async (req, res) => {
   const { title } = req.body;
