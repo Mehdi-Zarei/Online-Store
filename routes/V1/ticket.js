@@ -5,13 +5,6 @@ const authMiddleware = require("../../middlewares/auth");
 const isAdminMiddleware = require("../../middlewares/isAdmin");
 
 ticketRouter
-  .route("/")
-  .get(authMiddleware, isAdminMiddleware, ticketsController.getAll)
-  .post(authMiddleware, ticketsController.create);
-
-ticketRouter.route("/user").get(authMiddleware, ticketsController.userTickets);
-
-ticketRouter
   .route("/department/create")
   .post(authMiddleware, isAdminMiddleware, ticketsController.createDepartments);
 
@@ -22,6 +15,15 @@ ticketRouter
     isAdminMiddleware,
     ticketsController.createDepartmentSub
   );
+
+ticketRouter
+  .route("/")
+  .get(authMiddleware, isAdminMiddleware, ticketsController.getAll)
+  .post(authMiddleware, ticketsController.create);
+
+ticketRouter
+  .route("/user-tickets")
+  .get(authMiddleware, ticketsController.userTickets);
 
 ticketRouter.route("/department").get(ticketsController.departments);
 
