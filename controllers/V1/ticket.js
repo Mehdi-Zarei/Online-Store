@@ -63,7 +63,28 @@ exports.departmentsSub = async (req, res) => {
   return res.json(departmentSub);
 };
 
-exports.setAnswer = async (req, res) => {};
+exports.setAnswer = async (req, res) => {
+  const { body, ticketID } = req.body;
+
+  const ticket = await ticketsModel.findOne({ _id: ticketID });
+
+  const answer = await ticketsModel.create({
+    title: "پاسخ تیکت شما",
+    body,
+    ticketID,
+    departmentID: ticket.departmentID,
+    departmentSubID: ticket.departmentSubID,
+    priority: ticket.priority,
+    course: ticket.course,
+    user: req.user._id,
+    answer: 0,
+    isAnswer: 1,
+  });
+
+  await ticketsModel.findOneAndUpdate({ _id: ticketID }, { answer: 1 });
+
+  return res.status(201).json(answer);
+};
 
 exports.getAnswer = async (req, res) => {};
 
