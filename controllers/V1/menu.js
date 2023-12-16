@@ -14,7 +14,13 @@ exports.create = async (req, res) => {
   return res.status(201).json(menu);
 };
 
-exports.adminGetAll = async (req, res) => {};
+exports.adminGetAll = async (req, res) => {
+  const allMenu = await menuModel
+    .find({}, "title href")
+    .populate("parent", "title href")
+    .lean();
+  return res.json(allMenu);
+};
 
 exports.remove = async (req, res) => {};
 
