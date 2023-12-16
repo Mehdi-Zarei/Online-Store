@@ -1,7 +1,7 @@
 const menuModel = require("../../models/menu");
 
 // exports.getAll = async (req, res) => {
-//   //! This func use for and forEach loop
+//! This func use "for" and "forEach" loop for find menus and subMenus.
 //   const menus = await menuModel.find({}).lean();
 
 //   menus.forEach((menu) => {
@@ -20,22 +20,20 @@ const menuModel = require("../../models/menu");
 // };
 
 exports.getAll = async (req, res) => {
-  //! This func use forEach loop and filter method
+  //* This function reads menus and submenus from the database and returns them in a structured and nested way.
 
   const menus = await menuModel.find({}).lean();
 
-  const result = [];
+  const getSubmenus = (parentId) =>
+    menus
+      .filter((menu) => String(menu.parent) === String(parentId))
+      .map((submenu) => ({ ...submenu, submenus: getSubmenus(submenu._id) }));
 
-  menus.forEach((menu) => {
-    if (!menu.parent) {
-      const submenus = menus.filter(
-        (mainMenu) => String(mainMenu.parent) === String(menu._id)
-      );
-      result.push({ ...menu, submenus });
-    }
-  });
+  const result = menus
+    .filter((menu) => !menu.parent)
+    .map((menu) => ({ ...menu, submenus: getSubmenus(menu._id) }));
 
-  return res.json(result);
+  return res.json({ menus: result });
 };
 
 exports.create = async (req, res) => {
