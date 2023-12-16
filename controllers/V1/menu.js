@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const menuModel = require("../../models/menu");
 
 // exports.getAll = async (req, res) => {
@@ -56,6 +57,20 @@ exports.adminGetAll = async (req, res) => {
   return res.json(allMenu);
 };
 
-exports.remove = async (req, res) => {};
+exports.remove = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(409).json({ message: "Invalid menu ID !" });
+  }
+
+  const remove = await menuModel.findOneAndDelete({ _id: id });
+
+  if (!remove) {
+    return res.status(409).json({ message: "Menu not found !" });
+  }
+
+  return res.json(remove);
+};
 
 exports.updateMenuName = async (req, res) => {};
