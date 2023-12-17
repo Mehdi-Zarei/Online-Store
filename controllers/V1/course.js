@@ -147,6 +147,12 @@ exports.getOne = async (req, res) => {
     user: req.user._id,
   }));
 
+  const courseAverageRating =
+    comments.length > 0
+      ? comments.reduce((sum, comment) => sum + comment.score, 0) /
+        comments.length
+      : 0;
+
   let allComments = [];
 
   comments.forEach((comment) => {
@@ -162,12 +168,23 @@ exports.getOne = async (req, res) => {
     });
   });
 
+  if (courseAverageRating === 0 && comments.length === 0) {
+    return res.json({
+      course,
+      sessions,
+      comments: allComments,
+      userCourseCount,
+      didUserRegisterToThisCourse,
+      courseAverageRating: "تاکنون هیچ امتیازی برای این دوره ثبت نشده است",
+    });
+  }
   return res.json({
     course,
     sessions,
     comments: allComments,
     userCourseCount,
     didUserRegisterToThisCourse,
+    courseAverageRating,
   });
 };
 
