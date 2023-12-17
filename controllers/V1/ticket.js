@@ -4,137 +4,177 @@ const departmentsSubModel = require("../../models/departmentSub");
 const { default: mongoose } = require("mongoose");
 
 exports.getAll = async (req, res) => {
-  const tickets = await ticketsModel
-    .find({})
-    .populate("user", "name")
-    .populate("course", "name")
-    .populate("departmentID", "title")
-    .populate("departmentSubID", "title");
+  try {
+    const tickets = await ticketsModel
+      .find({})
+      .populate("user", "name")
+      .populate("course", "name")
+      .populate("departmentID", "title")
+      .populate("departmentSubID", "title");
 
-  return res.json(tickets);
+    return res.json(tickets);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.create = async (req, res) => {
-  const { departmentID, departmentSubID, priority, title, body, course } =
-    req.body;
+  try {
+    const { departmentID, departmentSubID, priority, title, body, course } =
+      req.body;
 
-  const newTicket = await ticketsModel.create({
-    departmentID,
-    departmentSubID,
-    priority,
-    title,
-    body,
-    course,
-    user: req.user._id,
-    answer: 0,
-    isAnswer: 0,
-  });
+    const newTicket = await ticketsModel.create({
+      departmentID,
+      departmentSubID,
+      priority,
+      title,
+      body,
+      course,
+      user: req.user._id,
+      answer: 0,
+      isAnswer: 0,
+    });
 
-  const mainTicket = await ticketsModel
-    .findOne({ _id: newTicket._id })
-    .populate("user", "name")
-    .populate("course", "name")
-    .populate("departmentID", "title")
-    .populate("departmentSubID", "title");
+    const mainTicket = await ticketsModel
+      .findOne({ _id: newTicket._id })
+      .populate("user", "name")
+      .populate("course", "name")
+      .populate("departmentID", "title")
+      .populate("departmentSubID", "title");
 
-  return res.status(201).json(mainTicket);
+    return res.status(201).json(mainTicket);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.userTickets = async (req, res) => {
-  const ticket = await ticketsModel
-    .find({ user: req.user._id })
-    .sort({ _id: -1 })
-    .populate("departmentID", "title")
-    .populate("departmentSubID", "title")
-    .populate("user", "name")
-    .lean();
+  try {
+    const ticket = await ticketsModel
+      .find({ user: req.user._id })
+      .sort({ _id: -1 })
+      .populate("departmentID", "title")
+      .populate("departmentSubID", "title")
+      .populate("user", "name")
+      .lean();
 
-  return res.json(ticket);
+    return res.json(ticket);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.departments = async (req, res) => {
-  const department = await departmentsModel.find({}, "title").lean();
+  try {
+    const department = await departmentsModel.find({}, "title").lean();
 
-  return res.json(department);
+    return res.json(department);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.departmentsSub = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(422).json({ message: "Department sub ID not valid !" });
-  }
-  const departmentSub = await departmentsSubModel
-    .find({ parent: id }, "title")
-    .lean();
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(422).json({ message: "Department sub ID not valid !" });
+    }
+    const departmentSub = await departmentsSubModel
+      .find({ parent: id }, "title")
+      .lean();
 
-  if (departmentSub != true) {
-    return res.status(404).json({ message: "Department sub not found ! " });
+    if (departmentSub != true) {
+      return res.status(404).json({ message: "Department sub not found ! " });
+    }
+    return res.json(departmentSub);
+  } catch (error) {
+    return res.status(500).json(error);
   }
-  return res.json(departmentSub);
 };
 
 exports.setAnswer = async (req, res) => {
-  const { body, ticketID } = req.body;
+  try {
+    const { body, ticketID } = req.body;
 
-  const ticket = await ticketsModel.findOne({ _id: ticketID });
+    const ticket = await ticketsModel.findOne({ _id: ticketID });
 
-  const answer = await ticketsModel.create({
-    title: "پاسخ تیکت شما",
-    body,
-    ticketID,
-    departmentID: ticket.departmentID,
-    departmentSubID: ticket.departmentSubID,
-    priority: ticket.priority,
-    course: ticket.course,
-    user: req.user._id,
-    mainTicketID: ticketID,
-    answer: 0,
-    isAnswer: 1,
-  });
+    const answer = await ticketsModel.create({
+      title: "پاسخ تیکت شما",
+      body,
+      ticketID,
+      departmentID: ticket.departmentID,
+      departmentSubID: ticket.departmentSubID,
+      priority: ticket.priority,
+      course: ticket.course,
+      user: req.user._id,
+      mainTicketID: ticketID,
+      answer: 0,
+      isAnswer: 1,
+    });
 
-  await ticketsModel.findOneAndUpdate({ _id: ticketID }, { answer: 1 });
+    await ticketsModel.findOneAndUpdate({ _id: ticketID }, { answer: 1 });
 
-  return res.status(201).json(answer);
+    return res.status(201).json(answer);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.getAnswer = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const ticket = await ticketsModel.findOne({ _id: id });
+    const ticket = await ticketsModel.findOne({ _id: id });
 
-  const ticketAnswer = await ticketsModel.findOne({ mainTicketID: id });
+    const ticketAnswer = await ticketsModel.findOne({ mainTicketID: id });
 
-  return res.json({ ticket, ticketAnswer });
+    return res.json({ ticket, ticketAnswer });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.remove = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(409).json({ message: "Ticket ID not valid !" });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(409).json({ message: "Ticket ID not valid !" });
+    }
+
+    const remove = await ticketsModel.findOneAndDelete({ _id: id });
+
+    if (!remove) {
+      return res.status(404).json({ message: "Ticket not found !" });
+    }
+
+    return res.status(200).json({ message: "Ticket removed successfully." });
+  } catch (error) {
+    return res.status(500).json(error);
   }
-
-  const remove = await ticketsModel.findOneAndDelete({ _id: id });
-
-  if (!remove) {
-    return res.status(404).json({ message: "Ticket not found !" });
-  }
-
-  return res.status(200).json({ message: "Ticket removed successfully." });
 };
 
 exports.createDepartments = async (req, res) => {
-  const { title } = req.body;
+  try {
+    const { title } = req.body;
 
-  const department = await departmentsModel.create({ title });
+    const department = await departmentsModel.create({ title });
 
-  return res.status(201).json(department);
+    return res.status(201).json(department);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.createDepartmentSub = async (req, res) => {
-  const { title, parent } = req.body;
+  try {
+    const { title, parent } = req.body;
 
-  const departmentSub = await departmentsSubModel.create({ title, parent });
+    const departmentSub = await departmentsSubModel.create({ title, parent });
 
-  return res.status(201).json(departmentSub);
+    return res.status(201).json(departmentSub);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };

@@ -22,13 +22,4 @@ articlesRouter
   .route("/:id")
   .delete(authMiddleware, isAdminMiddleware, articlesController.remove);
 
-articlesRouter
-  .route("/draft")
-  .post(
-    authMiddleware,
-    isAdminMiddleware,
-    multer({ storage: multerStorage }).single("cover"),
-    articlesController.saveDraft
-  );
-
 module.exports = articlesRouter;
