@@ -1,0 +1,2177 @@
+{
+	"info": {
+		"_postman_id": "e817d816-a1b4-4de7-a616-ff729f407340",
+		"name": "Online Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27784592"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"userName\":\"{{$randomUserName}}\",\r\n    \"phone\":\"09351234567\",\r\n    \"email\":\"{{$randomEmail}}\",\r\n    \"password\":\"Mahdi123\",\r\n    \"confirmPassword\":\"Mahdi123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/auth/register",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identifier\":\"Mahdi@gmail.com\",\r\n    \"password\":\"Mahdi123\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/auth/login",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ban",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/users/ban/6558a3771f5c9f4cc5a31e4e",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"users",
+								"ban",
+								"6558a3771f5c9f4cc5a31e4e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/users/ban/6558ab2931f0dc506722b527",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"users",
+								"ban",
+								"6558ab2931f0dc506722b527"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/users/6558ac062832218c58c72c59",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"users",
+								"6558ac062832218c58c72c59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"65589428f8613106d6a64e7f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/users/role",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"users",
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Update Information",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5NDI4Zjg2MTMxMDZkNmE2NGU3ZiIsImlhdCI6MTcwMDMwMzkxMiwiZXhwIjoxNzAyODk1OTEyfQ.jrVHyKhReYd1UdRgBTvPQ60EcxxiNHgY7YM5Ewb0xp0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{$randomFirstName}}\",\r\n    \"userName\":\"{{$randomUserName}}\",\r\n    \"email\":\"{{$randomEmail}}\",\r\n    \"password\":\"{{$randomPassword}}\",\r\n    \"phone\":\"09012356456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/users/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/category/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"بک اند\",\r\n    \"href\":\"back-end\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/category/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/category/65636b8c455b523531b90ec8",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"category",
+								"65636b8c455b523531b90ec8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"React\",\r\n    \"href\": \"Front\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/category/655a202d6dd1628bc24f5bf4",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"category",
+								"655a202d6dd1628bc24f5bf4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by href",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/category/back-end",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"category",
+								"back-end"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "create course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "TS",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "در حال برگزاری",
+									"type": "text"
+								},
+								{
+									"key": "descriptions",
+									"value": "الان و امروز کمتر کسی هست که از بازار کار داغ نود جی اس با خبر نباشه و یکی از دلایل استفاده از این تکنولوژی فارغ از یه خیلی از مزایاش برای برنامه",
+									"type": "text"
+								},
+								{
+									"key": "categoryID",
+									"value": "65636bc9455b523531b90ecf",
+									"type": "text"
+								},
+								{
+									"key": "href",
+									"value": "node-exs",
+									"type": "text"
+								},
+								{
+									"key": "support",
+									"value": "گروه تلگرامی",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "4350000",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/L:/7 learne/Node.JS Videos/1/Screenshot 2023-11-25 214102.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/course/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Course Sessions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "توسعه قابلیت ایجاد دوره در سایت",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "04:30",
+									"type": "text"
+								},
+								{
+									"key": "free",
+									"value": "0",
+									"description": "The free property must be a number (0 not free & 1 free).",
+									"type": "text"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/L:/7 learne/Node.JS Videos/اجرای کوئری های Readسون لرن.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/course/6563755e4622569f3579c10c/sessions",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"6563755e4622569f3579c10c",
+								"sessions"
+							]
+						},
+						"description": "The free property must be a number (0 not free & 1 is free)."
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Get Recent Course Sessions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/course/sessions",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Get a Course Sessions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/course/node-ex/6564b8a0ca742b6f433acb28",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"node-ex",
+								"6564b8a0ca742b6f433acb28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Delete Course Sessions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/course/sessions/65662610ff2a0407960077a",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"sessions",
+								"65662610ff2a0407960077a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User register in course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 1000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/course/656b685b6d48d850c38b5732/register",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"656b685b6d48d850c38b5732",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5NDI4Zjg2MTMxMDZkNmE2NGU3ZiIsImlhdCI6MTcwMDMwMzkxMiwiZXhwIjoxNzAyODk1OTEyfQ.jrVHyKhReYd1UdRgBTvPQ60EcxxiNHgY7YM5Ewb0xp0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/course/node-ex",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"node-ex"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/course/656b7110eaee56fb7535e189",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"656b7110eaee56fb7535e189"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Related Course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/course/related/Django",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"related",
+								"Django"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Presell Course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "آموزش حرفه ای React-JS",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "به اتمام رسیده",
+									"type": "text"
+								},
+								{
+									"key": "descriptions",
+									"value": "الان و امروز کمتر کسی هست که از بازار کار داغ نود جی اس با خبر نباشه و یکی از دلایل استفاده از این تکنولوژی فارغ از یه خیلی از مزایاش برای برنامه",
+									"type": "text"
+								},
+								{
+									"key": "categoryID",
+									"value": "656df22c72a633c0c1143609",
+									"type": "text"
+								},
+								{
+									"key": "href",
+									"value": "React-JS",
+									"type": "text"
+								},
+								{
+									"key": "support",
+									"value": "پشتیبانی سایت",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000000",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/L:/7 learne/Node.JS Videos/1/Screenshot 2023-11-25 214102.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/course/presell",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"presell"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Popular Course",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/course/popular",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"course",
+								"popular"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "User Create Comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"body\": \"بسیار دوره خوبی بود\",\r\n    \"score\": 5,\r\n    \"courseHref\": \"node-ex\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/comments/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"comments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Deleted Comments",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/comments/65676df1b21e6e0e2a4c03e3",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"comments",
+								"65676df1b21e6e0e2a4c03e3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Accept Comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/comments/656f49ab5ebbf29b207f5bcf/accept",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"comments",
+								"656f49ab5ebbf29b207f5bcf",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Reject Comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/comments/65677569ffff11abc14eb414/reject",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"comments",
+								"65677569ffff11abc14eb414",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Answer To Comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"body\":\"ممنون از لطف شما\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/comments/656f49ab5ebbf29b207f5bcf/answer",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"comments",
+								"656f49ab5ebbf29b207f5bcf",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Get All Comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/comments/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"comments",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Send Contact Us Message",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"مهدی\",\r\n    \"email\":\"catalyst0919@gmail.com\",\r\n    \"phone\":\"09123456789\",\r\n    \"body\":\" لطفا  تخفیف بلک  های ماهیانه رو بیشتر کنید.سلام\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/contact/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"contact",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Get All Contact Us Messages",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/contact/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"contact",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins remove Contact Us Messages",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/contact/656f65cca77cd0457970b371",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"contact",
+								"656f65cca77cd0457970b371"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Answer Contact Us Messages With Email.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"catalyst0919@gmail.com\",\r\n    \"answer\":\"سلام،ممنون از پیام شما.فردا تمامی تخفیف ها اعمال خواهند شد.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/contact/answer",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"contact",
+								"answer"
+							]
+						},
+						"description": "To send an email, you must change the \"user\" and \"pass\" and \"from\" entries in the \"answer\" function in the path of the controllers, in the \"contact .js\" file."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NewsLetters",
+			"item": [
+				{
+					"name": "Register In News Letters",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mah2di@gmil.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/newsletters/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"newsletters",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Get All News Letters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/newsletters/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"newsletters",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Global Search",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/search/TS",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"search",
+								"TS"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Admins Create Notifications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\":\"سلام\",\r\n    \"admin\":\"65748d744b41fcd877ab19e5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/notifications/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"notifications",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Get All Notifications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/notifications/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"notifications",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Remove Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/notifications/65748d744b41fcd877ab19e5/remove",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"notifications",
+								"65748d744b41fcd877ab19e5",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Receive Notifications For An Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/notifications/admins",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"notifications",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admins Seen Notification Message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/notifications/655893a2f8613106d6a64e71/seen",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"notifications",
+								"655893a2f8613106d6a64e71",
+								"seen"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discounts",
+			"item": [
+				{
+					"name": "Set discount on all courses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"discount\":\"30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/off/all",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"off",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set discount on one course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"Djangoo\",\r\n    \"max\": 1,\r\n    \"course\": \"656b685b6d48d850c38b5732\",\r\n    \"percent\": \"25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/off",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"off"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Discount Code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/off/Django",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"off",
+								"Django"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Discount Code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/off/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"off",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User use a discount code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course\":\"656b685b6d48d850c38b5732\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/off/Django",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"off",
+								"Django"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Create Articles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/C:/Users/Mahdi-PC/Desktop/12.jpg"
+								},
+								{
+									"key": "body",
+									"value": "DOCTYPE  از لحاظ لغوی مخفف عبارت Document Type به معنی “نوع سند” هست که توسط کنسرسیوم جهانی وب (W3C) به عنوان یک دستورالعمل معرفی شد. اکثر افراد به اشتباه این عبارت رو به عنوان تگ معرفی میکنن در حالی که مشخصات تگ رو نداره و بنابراین تگ محسوب نمیشه.\n\nDOCTYPE ابتدای کدهای یک صفحه وب قرار میگیره و به مرورگر اطلاع میده که از کدوم نسخه HTML یا XHTML برای نمایش صفحه جاری استفاده شده. در واقع وقتی یک مرورگر صفحه وب رو باز میکنه، اول DOCTYPE کدهای صفحه رو میخونه و بعد بر اساس اون، صفحه رو تفسیر و نمایش میده. این نوع دیتاها برای استانداردسازی وبسایت ‌ها در سطح وب اهمیت بالایی داره.\n\nبه این ترتیب مرورگر اطلاعات دقیقی در مورد ساختار و محتوای صفحه دریافت کرده و بر اساس اون، رفتار صفحه در مرورگر رو تنظیم خواهد کرد.\n\nیه مثال ساده اینکه DOCTYPE در HTML5 به صورت <!DOCTYPE HTML> استفاده میشه. این نوع تعریف به مرورگر اطلاع میده که در این صفحه از ورژن HTML5 استفاده شده و باید صفحه رو بر اساس استانداردهای HTML5 نمایش بده. تا اینجا احتمالا جواب سوال DOCTYPE چیست؟ رو گرفتید حالا وقتشه که در مورد این عبارت کوچیک اما مهم بیشتر بدونید.\n\nاهمیت یادگیری DOCTYPE\nImportance of learning DOCTYPE\n\nبرای اینکه بهتر به اهمیت یادگیری DOCTYPE و کاربرد اون پی ببرید، در ادامه مهمترین دلایل رو براتون لیست می کنیم تا بدونید این موضوع چقدر در عملکرد صفحات وب موثر هست.\n\nتضمین تطابق صفحه با استانداردها\nایجاد ساختار صحیح HTML\nجلوگیری از مشکلات ناشی از نمایش نادرست صفحات در مرورگرها\nافزایش سازگاری و قابلیت دسترسی صفحات در مرورگرهای مختلف\nبهره مندی از مزایای و ویژگی‌های ورژن‌های جدید HTML\nتأثیر DOCTYPE بر مرورگرها و رفتار صفحات وب",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "با یه سوال شروع کنیم. فکر می کنید دلیل اینکه با هر مرورگری یک صفحه وب رو باز می کنید، شکل و شمایل اون تقریبا یکسان هست چیه؟! فارغ از اینکه فایرفاکس باشه یا کروم یا اپرا…\n\nمرورگر از کجا متوجه میشه استاندارد هر صفحه چی هست و بر چه اساسی باید کدهای HTML اون صفحه رو تفسیر کنه؟ از کجا بدونه کدوم نسخه HTML استفاده شده تا بر اساس قابلیت های اون نسخه محتوارو نمایش بده؟ یا اصلا از کجا متوجه بشهHTML  هست یاXHTML ؟",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Doctype چیست؟ اهمیت DOCTYPE در html\n",
+									"type": "text"
+								},
+								{
+									"key": "href",
+									"value": "what-is-doctype",
+									"type": "text"
+								},
+								{
+									"key": "categoryID",
+									"value": "656df22c72a633c0c1143609",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/article/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"article",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Article",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/article/6577369b3ec31f8b417ff1cd",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"article",
+								"6577369b3ec31f8b417ff1cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/article/what-is-doctype",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"article",
+								"what-is-doctype"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/article/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"article",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get all user order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/orders/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one user order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/orders/656782b30fe640ad6ec4b6a1",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"orders",
+								"656782b30fe640ad6ec4b6a1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tickets",
+			"item": [
+				{
+					"name": "Create new department",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"بخش پشتیبانی\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/department/create",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"department",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new department sub",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"کد های تخفیف\",\r\n    \"parent\":\"657c393779ea183d360a1d70\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/department-sub/create",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"department-sub",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all department ",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/department",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"department"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get department subs",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/department/657c391179ea183d360a1d6d/subs",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"department",
+								"657c391179ea183d360a1d6d",
+								"subs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User send ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"departmentID\": \"657c393779ea183d360a1d70\",\r\n    \"departmentSubID\": \"657c3bdfb989fc1072b09e5e\",\r\n    \"priority\": 3,\r\n    \"title\": \"دریافت کد تخفیف\",\r\n    \"body\": \"سلام\",\r\n    \"course\":\"6563755e4622569f3579c10c\" // course not required \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin get all tickets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Answer to tickets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"body\":\"علیک سلام\",\r\n    \"ticketID\":\"657c4f4da00778f54a7bd340\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/answer",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User get the answer to his ticket",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"body\":\"علیک سلام\",\r\n    \"ticketID\":\"657c4f4da00778f54a7bd340\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/657c4f42a00778f54a7bd339/answer",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"657c4f42a00778f54a7bd339",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User get the his ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/user-tickets",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"user-tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin remove ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/tickets/657c758c2c0d60a114664c53/remove",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"tickets",
+								"657c758c2c0d60a114664c53",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "menu",
+			"item": [
+				{
+					"name": "Create menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"آموزش NodeJs\",\r\n    \"href\":\"Node-JS\",\r\n    \"parent\":\"657d73a3257981580d6afe13\" // If you want to create a submenu, you must enter the ID of the main menu in this field\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}v1/menu/",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"menu",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin get all menu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/menu/all",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"menu",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all menus with sub menus",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/menu",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin remove menu or subMenu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg5M2EyZjg2MTMxMDZkNmE2NGU3MSIsImlhdCI6MTcwMDMwMzc3OCwiZXhwIjoxNzAyODk1Nzc4fQ.xPQguxb8-H7GadTmzrJKjYl1Lq95vZ7aqOAJFxTsBzY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}v1/menu/657d9891b38c8as40deb4b89e/remove",
+							"host": [
+								"{{baseURL}}v1"
+							],
+							"path": [
+								"menu",
+								"657d9891b38c8as40deb4b89e",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
